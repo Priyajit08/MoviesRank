@@ -1,0 +1,92 @@
+﻿@model MovieRank.Models.Actor
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+<link href="~/Content/chosen.css" rel="stylesheet" />
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+@using (Html.BeginForm("Create", "Actors", FormMethod.Post, new { enctype = "multipart/form-data" })) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Celeb profile</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Sex, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                Male
+                @Html.RadioButtonFor(model => model.Sex, "Male")
+                Female
+                @Html.RadioButtonFor(model => model.Sex, "Female")
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DOB, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control", placeholder = "Release Date", @readonly = "true" } })
+                @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Bio, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Bio, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Bio, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.workedON, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.MovieList, Model.getMovieList.Select(x => new SelectListItem { Text = x.Name, Value = x.Name }), new { @class = "form-control myselect2", @multiple = true })
+                @Html.ValidationMessageFor(model => model.workedON, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" name="ImageFileActor" id="ImageFileActor" required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+<script src="~/Scripts/chosen.jquery.min.js"></script>
+<script src="~/Scripts/chosen.proto.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".myselect2").chosen();
+    })
+    $(document).ready(function () {
+        $('input[type=datetime]').datepicker({
+            dateFormat: "dd/M/yy",
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "-60:+0"
+        }) })
+        </script>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

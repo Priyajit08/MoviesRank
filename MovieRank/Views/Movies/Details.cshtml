@@ -1,0 +1,70 @@
+﻿@model MovieRank.Models.Movie
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Movie</h4>
+    <hr />
+    <table>
+        <tr>
+            <td><img src="@Url.Content(Model.Poster)" width="140" height="190" /></td>
+            <td>
+                <dl class="dl-horizontal">
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Name)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Rating)
+                    </dt>
+                    <dd>
+                        @for (var i = 1; i <= Model.Rating; i++)
+                        {
+                            <span class="starGlowN"></span>
+                        }
+                        @for (var i = (Model.Rating + 1); i <= 5; i++)
+                        {
+                            <span class="starFadeN"></span>
+                        }
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Plot)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Plot)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.YearOfRelease)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.YearOfRelease)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Actor.Name)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CastID)
+                    </dd>
+
+                </dl>
+            </td>
+        </tr>
+    </table>
+</div>
+<p>
+    <hr />
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

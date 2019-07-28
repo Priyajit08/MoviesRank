@@ -1,0 +1,318 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MovieRankModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Actors">
+          <Key>
+            <PropertyRef Name="AID" />
+          </Key>
+          <Property Name="AID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Sex" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="DOB" Type="date" Nullable="false" />
+          <Property Name="Bio" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="workedON" Type="varchar" MaxLength="200" />
+          <Property Name="Image" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Comments">
+          <Key>
+            <PropertyRef Name="CID" />
+          </Key>
+          <Property Name="CID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MID" Type="int" Nullable="false" />
+          <Property Name="Comments" Type="varchar" MaxLength="700" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Movie">
+          <Key>
+            <PropertyRef Name="MID" />
+          </Key>
+          <Property Name="MID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Plot" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="Poster" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="CastID" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="YearOfRelease" Type="date" Nullable="false" />
+          <Property Name="Rating" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="NID" />
+          </Key>
+          <Property Name="NID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="News" Type="varchar" MaxLength="700" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Images" Type="varchar" MaxLength="150" />
+          <Property Name="Details" Type="varchar" MaxLength="1500" />
+        </EntityType>
+        <EntityType Name="TComments">
+          <Key>
+            <PropertyRef Name="CID" />
+          </Key>
+          <Property Name="CID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TID" Type="int" Nullable="false" />
+          <Property Name="Comments" Type="varchar" MaxLength="700" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TVShows">
+          <Key>
+            <PropertyRef Name="TID" />
+          </Key>
+          <Property Name="TID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Plot" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Poster" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="CastID" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="YearOfRelease" Type="date" Nullable="false" />
+          <Property Name="Rating" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Comments_Movie">
+          <End Role="Movie" Type="Self.Movie" Multiplicity="1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movie">
+              <PropertyRef Name="MID" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="MID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TComments_TVShows">
+          <End Role="TVShows" Type="Self.TVShows" Multiplicity="1" />
+          <End Role="TComments" Type="Self.TComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TVShows">
+              <PropertyRef Name="TID" />
+            </Principal>
+            <Dependent Role="TComments">
+              <PropertyRef Name="TID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MovieRankModelStoreContainer">
+          <EntitySet Name="Actors" EntityType="Self.Actors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Movie" EntityType="Self.Movie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TComments" EntityType="Self.TComments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TVShows" EntityType="Self.TVShows" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Comments_Movie" Association="Self.FK_Comments_Movie">
+            <End Role="Movie" EntitySet="Movie" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TComments_TVShows" Association="Self.FK_TComments_TVShows">
+            <End Role="TVShows" EntitySet="TVShows" />
+            <End Role="TComments" EntitySet="TComments" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MovieRankModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Actor">
+          <Key>
+            <PropertyRef Name="AID" />
+          </Key>
+          <Property Name="AID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sex" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Bio" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="workedON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Image" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="CID" />
+          </Key>
+          <Property Name="CID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MID" Type="Int32" Nullable="false" />
+          <Property Name="Comments" Type="String" MaxLength="700" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Movie" Relationship="Self.FK_Comments_Movie" FromRole="Comments" ToRole="Movie" />
+        </EntityType>
+        <EntityType Name="Movie">
+          <Key>
+            <PropertyRef Name="MID" />
+          </Key>
+          <Property Name="MID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Plot" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Poster" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CastID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="YearOfRelease" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Rating" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK_Comments_Movie" FromRole="Movie" ToRole="Comments" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="NID" />
+          </Key>
+          <Property Name="NID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="News1" Type="String" MaxLength="700" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Images" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Details" Type="String" MaxLength="1500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TComment">
+          <Key>
+            <PropertyRef Name="CID" />
+          </Key>
+          <Property Name="CID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TID" Type="Int32" Nullable="false" />
+          <Property Name="Comments" Type="String" MaxLength="700" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TVShow" Relationship="Self.FK_TComments_TVShows" FromRole="TComments" ToRole="TVShows" />
+        </EntityType>
+        <EntityType Name="TVShow">
+          <Key>
+            <PropertyRef Name="TID" />
+          </Key>
+          <Property Name="TID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Plot" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Poster" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CastID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="YearOfRelease" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Rating" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TComments" Relationship="Self.FK_TComments_TVShows" FromRole="TVShows" ToRole="TComments" />
+        </EntityType>
+        <Association Name="FK_Comments_Movie">
+          <End Role="Movie" Type="Self.Movie" Multiplicity="1" />
+          <End Role="Comments" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movie">
+              <PropertyRef Name="MID" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="MID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TComments_TVShows">
+          <End Role="TVShows" Type="Self.TVShow" Multiplicity="1" />
+          <End Role="TComments" Type="Self.TComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TVShows">
+              <PropertyRef Name="TID" />
+            </Principal>
+            <Dependent Role="TComments">
+              <PropertyRef Name="TID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MovieRankEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Actors" EntityType="Self.Actor" />
+          <EntitySet Name="Comments" EntityType="Self.Comment" />
+          <EntitySet Name="Movies" EntityType="Self.Movie" />
+          <EntitySet Name="News" EntityType="Self.News" />
+          <EntitySet Name="TComments" EntityType="Self.TComment" />
+          <EntitySet Name="TVShows" EntityType="Self.TVShow" />
+          <AssociationSet Name="FK_Comments_Movie" Association="Self.FK_Comments_Movie">
+            <End Role="Movie" EntitySet="Movies" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TComments_TVShows" Association="Self.FK_TComments_TVShows">
+            <End Role="TVShows" EntitySet="TVShows" />
+            <End Role="TComments" EntitySet="TComments" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MovieRankModelStoreContainer" CdmEntityContainer="MovieRankEntities">
+          <EntitySetMapping Name="Actors">
+            <EntityTypeMapping TypeName="MovieRankModel.Actor">
+              <MappingFragment StoreEntitySet="Actors">
+                <ScalarProperty Name="AID" ColumnName="AID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Bio" ColumnName="Bio" />
+                <ScalarProperty Name="workedON" ColumnName="workedON" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="MovieRankModel.Comment">
+              <MappingFragment StoreEntitySet="Comments">
+                <ScalarProperty Name="CID" ColumnName="CID" />
+                <ScalarProperty Name="MID" ColumnName="MID" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Movies">
+            <EntityTypeMapping TypeName="MovieRankModel.Movie">
+              <MappingFragment StoreEntitySet="Movie">
+                <ScalarProperty Name="MID" ColumnName="MID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Plot" ColumnName="Plot" />
+                <ScalarProperty Name="Poster" ColumnName="Poster" />
+                <ScalarProperty Name="CastID" ColumnName="CastID" />
+                <ScalarProperty Name="YearOfRelease" ColumnName="YearOfRelease" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="News">
+            <EntityTypeMapping TypeName="MovieRankModel.News">
+              <MappingFragment StoreEntitySet="News">
+                <ScalarProperty Name="NID" ColumnName="NID" />
+                <ScalarProperty Name="News1" ColumnName="News" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Images" ColumnName="Images" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TComments">
+            <EntityTypeMapping TypeName="MovieRankModel.TComment">
+              <MappingFragment StoreEntitySet="TComments">
+                <ScalarProperty Name="CID" ColumnName="CID" />
+                <ScalarProperty Name="TID" ColumnName="TID" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TVShows">
+            <EntityTypeMapping TypeName="MovieRankModel.TVShow">
+              <MappingFragment StoreEntitySet="TVShows">
+                <ScalarProperty Name="TID" ColumnName="TID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Plot" ColumnName="Plot" />
+                <ScalarProperty Name="Poster" ColumnName="Poster" />
+                <ScalarProperty Name="CastID" ColumnName="CastID" />
+                <ScalarProperty Name="YearOfRelease" ColumnName="YearOfRelease" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

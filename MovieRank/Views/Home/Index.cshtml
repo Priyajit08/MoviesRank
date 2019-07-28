@@ -1,0 +1,58 @@
+﻿@model MovieRank.Models.Movie
+@{
+    ViewBag.Title = "MovieRank";
+}
+
+<div >
+    <div>
+        <br />
+    </div>
+    @using (Html.BeginForm("Index", "Movies", new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div>
+            <div class="jumbotron" style="background-image: url('../../Content/fueled-21112017-al_2x.gif'); background-position:center">
+                <h1>MoviesRank.com</h1>
+                <p class="lead">Movies, TV Shows, Trailers, Actors and More</p>
+                <br />
+            </div>
+            <div>
+                <center>
+                    <h3 style="color:white">Search Movies, TV Shows and celbs</h3>
+                    <input type="text" id="nameToFind" name="nameToFind" class="form-control">
+                </center>
+                <p><center><input type="submit" value= &raquo; class="btn btn-primary btn-lg" /> </center></p>
+                <br />
+            </div>
+            <center>
+                <div>
+                    @{
+                        var data = ViewBag.Message;
+                    }
+                    <h4 style="color:white">@data</h4> 
+            </div>
+        </center>
+        </div>
+        <center>
+            <table style="color:white">
+                <tr>
+                    <td>@Html.ActionLink("TOP MOVIES ", "Index", "Movies", new { @nameToFind = "TopMovies" }, null)</td>
+                    <td > || </td>
+                    <td>@Html.ActionLink("LATEST MOVIES", "Index", "Movies", new { @nameToFind = "LatestMovies" }, null)</td>
+                    <td> || </td>
+                    <td>@Html.ActionLink("TOP TV SHOWS ", "Index", "TVShows", new { @nameToFind = "TopTV" }, null)</td>
+                    <td> || </td>
+                    <td>@Html.ActionLink(" LATEST TV SHOWS", "Index", "TVShows", new { @nameToFind = "LatestTV" }, null)</td>
+                </tr>
+            </table>
+        </center>
+    }
+    @{
+        if (ViewBag.SearchKey != null)
+        {
+            <span>
+                Search Key: @ViewBag.SearchKey
+            </span>
+        }
+    }
+</div>

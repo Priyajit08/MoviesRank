@@ -1,0 +1,54 @@
+﻿@model IEnumerable<MovieRank.Models.Comment>
+
+@{
+    ViewBag.Title = "Index";
+}
+@{
+    int id = Convert.ToInt32(Session["id"]);
+}
+<style>
+    .back{
+        background-color: #fff;
+        opacity:0.85;
+        filter: alpha(opacity=50);
+    }
+</style>
+<h2>Reviews for @Session["Name"]</h2>
+<h4> @for (var i = 1; i <= Convert.ToInt32(Session["Ratings"]); i++)
+            {
+    <span class="starGlowN"></span>
+}
+@for (var i = (Convert.ToInt32(Session["Ratings"]) + 1); i <= 5; i++)
+            {
+    <span class="starFadeN"></span>
+}</h4>
+<p>
+    @Html.ActionLink(" + Add Review", "Create")
+</p>
+<div class="back">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Comments)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comments)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.CID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.CID })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+<hr />
+@Html.ActionLink(" <- Back to Movies", "Index" ,"Movies",null,null)

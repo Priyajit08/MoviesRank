@@ -1,0 +1,85 @@
+﻿@model IEnumerable<MovieRank.Models.Actor>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Celebs</h2>
+<style>
+.back{
+    background-color: #fff;
+    opacity:0.85;
+    filter: alpha(opacity=50); 
+}
+.col1 {
+    width: 15%;
+}
+  .col3 {
+    width: 5%;
+}
+.col2 {
+    width: 25%
+}
+    </style>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="back">
+    <table class="table">
+        <tr>
+            <th class="col1">
+
+            </th>
+            <th class="col1">
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th class="col3">
+                @Html.DisplayNameFor(model => model.Sex)
+            </th>
+            <th class="col1">
+                @Html.DisplayNameFor(model => model.DOB)
+            </th>
+            <th class="col2">
+                @Html.DisplayNameFor(model => model.Bio)
+            </th>
+            <th class="col1">
+                @Html.DisplayNameFor(model => model.workedON)
+            </th>
+            <th>
+                Actions
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@Url.Content(@item.Image)" width="100" height="130" />
+                </td>
+                <bold>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Sex)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DOB, "{0:dd/MM/yyyy}")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Bio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.workedON)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.AID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.AID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.AID })
+                    </td>
+            </tr>
+        }
+
+    </table>
+</div>

@@ -1,0 +1,59 @@
+﻿@model MovieRank.Models.News
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detailed</h2>
+
+<div>
+    <h4>News</h4>
+    <hr />
+    <table>
+        <tr>
+            <td>
+                @if (Model.Images != null)
+                {
+                    <img src="@Url.Content(Model.Images)" width="190" height="140" />
+                }
+            </td>
+            <td>
+                <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Date)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Date)
+            </dd>
+             <dt>
+                <br />
+             </dt>
+            <dd>
+                <br />
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.News1)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.News1)
+            </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Details)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Details)
+                    </dd>
+            </dl>
+            </td>
+            </tr>
+        </table>
+
+</div>
+<p>
+    <hr />
+    @Html.ActionLink("Edit", "Edit", new { id = Model.NID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

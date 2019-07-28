@@ -1,0 +1,96 @@
+﻿@model IEnumerable<MovieRank.Models.TVShow>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>TV Shows</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<style>
+        .back{
+    background-color: #fff;
+    opacity:0.85;
+    filter: alpha(opacity=50); 
+}
+    .col1 {
+        width: 10%;
+    }
+
+    .col3 {
+        width: 20%;
+    }
+
+    .col2 {
+        width: 30%;
+    }
+</style>
+<div class="back">
+    <table class="table">
+        <tr>
+            <th class="col1">
+                @Html.DisplayNameFor(model => model.Poster)
+            </th>
+            <th class="col1">
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th class="col1">
+                @Html.DisplayNameFor(model => model.YearOfRelease)
+            </th>
+            <th class="col2">
+                @Html.DisplayNameFor(model => model.Plot)
+            </th>
+            <th class="col1">
+                @Html.DisplayNameFor(model => model.Actor.Name)
+            </th>
+            <th class="col3">
+                @Html.DisplayNameFor(model => model.Rating)
+            </th>
+            <th>
+                Reviews
+            </th>
+            <th>Actions</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@Url.Content(@item.Poster)" width="100" height="130" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.YearOfRelease)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Plot)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CastID)
+                </td>
+                <td>
+                    @for (var i = 1; i <= item.Rating; i++)
+                    {
+                        <span class="starGlowN"></span>
+                    }
+                    @for (var i = (item.Rating + 1); i <= 5; i++)
+                    {
+                        <span class="starFadeN"></span>
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("See Review", "Index", "TComments", new { id = item.TID }, null)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.TID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.TID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.TID })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

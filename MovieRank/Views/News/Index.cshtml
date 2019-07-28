@@ -1,0 +1,60 @@
+﻿@model IEnumerable<MovieRank.Models.News>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>News & Updates</h2>
+<style>
+        .back{
+    background-color: #fff;
+    opacity:0.85;
+    filter: alpha(opacity=50); 
+}</style>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="back">
+    <table class="table">
+        <tr>
+            <th>
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.News1)
+            </th>
+            <th>ACTIONS</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                @if (item.Images != null)
+                {
+                    <td>
+                        <img src="@Url.Content(@item.Images)" width="190" height="140" />
+                    </td>
+                }
+                else
+                {
+                    <td></td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.News1)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.NID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.NID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.NID })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
