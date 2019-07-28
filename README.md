@@ -1,7 +1,7 @@
 # MoviesRank
 ## Find Movies/TV Shows and celebs details, rate movies and tv shows, give reviews, view top movies and tv shows and more.
 
-                   ![picture](https://media.giphy.com/media/ka04C4vgSSkpK8h175/giphy.gif)
+![picture](https://media.giphy.com/media/ka04C4vgSSkpK8h175/giphy.gif)
 
 Designed using ASP.NET MVC
 
