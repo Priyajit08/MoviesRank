@@ -8,5 +8,9 @@ Instructions to replicate the project -
 2. Unzip it.
 3. Using the DB scripts recreate the DB
 4. Open the MovieRank solution file.
-5. Connect the DB 
+5. Connect to the DB 
 6. Enjoy :-;
+
+Softwares used - 
+1. Visual Studio Community 2015
+2. SQL Server 2014.
