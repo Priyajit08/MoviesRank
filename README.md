@@ -1,6 +1,6 @@
 # MoviesRank
 Find Movies/TV Shows and celebs details, rate movies and tv shows, give reviews, view top movies and tv shows and more.
-
+![picture]https://github.com/Priyajit08/MoviesRank/blob/master/Home.png
 Designed using ASP.NET MVC
 
 Instructions to replicate the project -
